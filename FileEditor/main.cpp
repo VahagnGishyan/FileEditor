@@ -12,6 +12,11 @@ int main()
     object.print();
     object.updateFile("newdata.txt");
 
+    object.addNewLineIndex(7, "\tSime is so cute");
+    object.print();
+
+    std::vector<std::string> data = object.separateBySpaces(7);
+
     std::cout << std::endl << "End work main.cpp" << std::endl;
 
     return 0;
