@@ -198,17 +198,18 @@ std::vector<std::string> FileEditor::separateBySpaces(const ushint indexLine)
 
         if (std::isspace(symbol))
         {
-            if (resultData.empty())
-                continue;
             if (word.empty())
                 continue;
             resultData.push_back(word);
+            word = "";
         }
         else
         {
             word += symbol;
         }
     }
+    if(!word.empty())
+        resultData.push_back(word);
 
     return (resultData);
 }
