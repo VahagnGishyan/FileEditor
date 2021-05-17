@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{b1774fcf-9956-450e-9ef8-fdca61e73783}</ProjectGuid>
-    <RootNamespace>FileEditor</RootNamespace>
+    <ProjectGuid>{2194c30a-0252-443b-a174-905bf78eb1d4}</ProjectGuid>
+    <RootNamespace>FileTextEditor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FileEditor.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClInclude Include="FileEditor.h" />
+    <ClInclude Include="FileTextEditor.h" />
+    <ClInclude Include="Header.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileEditor.h" />
-    <ClInclude Include="Header.h" />
+    <ClCompile Include="FileEditor.cpp" />
+    <ClCompile Include="FileTextEditor.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
