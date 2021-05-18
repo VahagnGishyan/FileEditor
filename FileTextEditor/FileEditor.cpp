@@ -61,7 +61,7 @@ void FileEditor::deleteLineBack()
 }
 
 //for line
-void FileEditor::addNewLineIndex(const unsigned short indexLine, const std::string& newLine)
+void FileEditor::addNewLine(const unsigned short indexLine, const std::string& newLine)
 {
     std::string Line = newLine;
     ushint size = static_cast<ushint>(m_data.size());
@@ -74,7 +74,7 @@ void FileEditor::addNewLineIndex(const unsigned short indexLine, const std::stri
     }
     addNewLineBack(Line);
 }
-void FileEditor::deleteLineIndex(const shint indexLine)
+void FileEditor::deleteLine(const shint indexLine)
 {
     for (unsigned short int index = indexLine; index < size() - 1; ++index)
     {
@@ -83,46 +83,50 @@ void FileEditor::deleteLineIndex(const shint indexLine)
     deleteLineBack();
 }
 
-void FileEditor::addLineBetween(const shint indexLine, const shint indexSymbol, const std::string& newData)
+void FileEditor::deleteInLine(const shint indexLine, const shint indexleft, const shint indexRight)
 {
+    std::string line = FileEditor::getLine(indexLine);
+
     std::string registLeft = "";
     std::string registRight = "";
 
-    for (unsigned short index = 0; index <= indexSymbol; ++index)
+    for (unsigned short index = 0; index < indexleft; ++index)
     {
-        registLeft += m_data[indexLine][index];
+        registRight += line[index];
     }
 
-    const ushint endSize = getIndexLineEnd(indexLine);
-    for (unsigned short index = indexSymbol + 1; index < endSize; ++index)
+    const ushint size = static_cast<ushint>(line.size());
+    for (unsigned short index = indexRight; index < size; ++index)
     {
         registRight += m_data[indexLine][index];
     }
 
-    m_data[indexLine] = registLeft + newData + registRight;
+    std::string newLine = registLeft + registRight;
+    FileEditor::setLine(indexLine, newLine);
 }
 
-void FileEditor::deleteInLineRight(const shint indexLine, const shint indexSymbol)
+void FileEditor::setLine(int index, const std::string& newLine)
 {
-    std::string registLeft = "";
+    int sizeData = size();
 
-    for (unsigned short index = 0; index <= indexSymbol; ++index)
+    assert(index <= sizeData && "index shell be <= size");
+
+    if (index == sizeData)
     {
-        registLeft += m_data[indexLine][index];
+        m_data.push_back(newLine);
     }
-
-    m_data[indexLine] = registLeft;
+    else
+    {
+        m_data[index] = newLine;
+    }
 }
-void FileEditor::deleteInLineLeft(const shint indexLine, const shint indexSymbol)
+std::string FileEditor::getLine(int index) const
 {
-    std::string registRight = "";
-    const ushint size = getIndexLineEnd(indexLine);
-    for (unsigned short index = indexSymbol; index < size; ++index)
-    {
-        registRight += m_data[indexLine][index];
-    }
+    int sizeData = size();
 
-    m_data[indexLine] = registRight;
+    assert(index < sizeData && "index shell be <= size");
+
+    return(m_data[index]);
 }
 
 //for file
@@ -175,7 +179,7 @@ void FileEditor::readFromFile(const std::string& fileName)
 }
 
 //Additions
-int FileEditor::getIndexLineEnd(const ushort start) const
+int FileEditor::getLineEnd(const ushort start) const
 {
     return m_data.at(start).size();
 }

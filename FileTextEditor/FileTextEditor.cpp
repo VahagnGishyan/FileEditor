@@ -12,7 +12,7 @@ void FileTextEditor::updata()
     FileEditor::empty();
     for (ushint start = 0; start < size(); ++start)
     {
-        std::vector<std::string>& line = getLine(start);
+        std::vector<std::string> line = FileTextEditor::getLine(start);
         
         if (line.empty())
             continue;
@@ -23,55 +23,8 @@ void FileTextEditor::updata()
         {
             newLine += " " + line[index];
         }
-    }
 
-    ushint cycles = std::min((int)m_text.size(), size() - m_startLine);
-
-    for (ushint indexLine = 0; indexLine < cycles; ++indexLine)
-    {
-        std::vector<std::string>& line = m_text[indexLine];
-
-        std::string newline;
-
-        if (line.empty())
-            continue;
-
-        newline += line[0];
-        for (ushint index = 1; index < line.size(); ++index)
-        {
-            newline += " " + line[index];
-        }
-        FileEditor::setLineIndex(indexLine + m_startLine, newline);
-    }
-    if ((int)m_text.size() > size() - m_startLine)
-    {
-        for (ushint start = cycles; start < m_text.size(); ++start)
-        {
-            std::vector<std::string>& line = m_text[start];
-
-            std::string newline;
-
-            if (line.empty())
-                continue;
-
-            newline += line[0];
-            for (ushint index = 1; index < line.size(); ++index)
-            {
-                newline += " " + line[index];
-            }
-            FileEditor::addNewLineBack(newline);
-        }
-    }
-    else if ((int)m_text.size() < size() - m_startLine)
-    {
-        for (ushint indexLine = cycles; indexLine < size(); ++indexLine)
-        {
-            FileEditor::deleteLineBack();
-        }
-    }
-    else
-    {
-        return;
+        FileTextEditor::setLine(start, newLine);
     }
 }
 std::string FileTextEditor::getFileName()  const
@@ -96,11 +49,11 @@ void FileTextEditor::empty()
 //set, get, add and delete lines
 std::vector<std::string> FileTextEditor::getLine(int indexLine)
 {
-    // TODO: Добавьте сюда код реализации.
+    return(m_text.at(indexLine));
 }
 void FileTextEditor::setLine(int indexLine, std::string newLine)
 {
-    // TODO: Добавьте сюда код реализации.
+    FileEditor::
 }
 void FileTextEditor::addNewLine(int indexLine, std::string newLine)
 {
