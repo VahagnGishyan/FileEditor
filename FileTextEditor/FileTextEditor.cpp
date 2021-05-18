@@ -1,11 +1,5 @@
 #include "FileTextEditor.h"
 
-//operators
-std::vector<std::string> FileTextEditor::operator[](int index) const
-{
-    return (m_text.at(index));
-}
-
 //for FileEditor
 void FileTextEditor::updata()
 {
@@ -24,12 +18,8 @@ void FileTextEditor::updata()
             newLine += " " + line[index];
         }
 
-        FileTextEditor::setLine(start, newLine);
+        FileEditor::setLine(start, newLine);
     }
-}
-std::string FileTextEditor::getFileName()  const
-{
-    // TODO: Добавьте сюда код реализации.
 }
 
 //for base work 
@@ -47,35 +37,58 @@ void FileTextEditor::empty()
 }
 
 //set, get, add and delete lines
-std::vector<std::string> FileTextEditor::getLine(int indexLine)
+std::vector<std::string> FileTextEditor::getLine(int indexLine) const 
 {
     return(m_text.at(indexLine));
-}
-void FileTextEditor::setLine(int indexLine, std::string newLine)
+} 
+void FileTextEditor::setLine(int indexLine, const std::vector<std::string>&  newLine)
 {
-    FileEditor::setLine(indexLine, newLine);
+    m_text.at(indexLine) = newLine;
 }
-void FileTextEditor::addNewLine(int indexLine, std::string newLine)
+void FileTextEditor::addNewLine(int indexLine, const std::vector<std::string>& newLine)
 {
-    // TODO: Добавьте сюда код реализации.
+    std::vector<std::string> reservData;
+    ushint length = size();
+
+    for (ushint index = 0; index < length; ++index)
+    {
+        std::vector<std::string> registerLine = FileTextEditor::getLine(index);
+        FileTextEditor::setLine(index, reservData);
+        reservData = registerLine;
+    }
+
+    addNewLineBack(reservData);
 }
 void FileTextEditor::deleteLine(int indexLine)
 {
-    // TODO: Добавьте сюда код реализации.
+    for (unsigned short int index = indexLine; index < size() - 1; ++index)
+    {
+        FileTextEditor::setLine(index, FileTextEditor::getLine(index + 1));
+    }
+    deleteLineBack();
 }
-void FileTextEditor::addNewLineBack(int indexLine, std::string newLine)
+void FileTextEditor::addNewLineBack(const std::vector<std::string>& newLine)
 {
-    // TODO: Добавьте сюда код реализации.
+    m_text.push_back(newLine);
 }
-void FileTextEditor::deleteLineBack(int indexLine)
+void FileTextEditor::deleteLineBack()
 {
-    // TODO: Добавьте сюда код реализации.
+    m_text.pop_back();
 }
 
 //work in lines
-void FileTextEditor::searchWordInLine(int indexLine, std::string word, int indexWord, int indexSymbol) const
+void FileTextEditor::searchWordInLine(int indexLine, std::string word, int indexWord) const
 {
-    // TODO: Добавьте сюда код реализации.
+    const std::vector<std::string>& Line = FileTextEditor::getLine(indexLine);
+
+    for (ushint start = 0; start < Line.size(); ++start)
+    {
+        if (Line[start] == word)
+        {
+            return start;
+        }
+    }
+    return false;
 }
 void FileTextEditor::searchSymbolInLine(int indexLine, char symbol, int indexWord, int indexSymbol) const
 {

@@ -26,10 +26,12 @@ public:
     void empty();
 
     //set, get, add and delete lines
-    std::vector<std::string> getLine(int indexLine);
+    std::vector<std::string> getLine(int indexLine) const; 
     void setLine(int indexLine, const std::vector<std::string>& newLine);
+
     void addNewLine(int indexLine, const std::vector<std::string>& newLine);
     void deleteLine(int indexLine);
+
     void addNewLineBack(const std::vector<std::string>&  newLine);
     void deleteLineBack();
 
