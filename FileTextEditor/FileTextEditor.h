@@ -36,8 +36,8 @@ public:
     void deleteLineBack();
 
     //work in lines
-    void searchWordInLine(int indexLine, std::string word, int indexWord, int indexSymbol) const;
-    void searchSymbolInLine(int indexLine, char symbol, int indexWord, int indexSymbol) const;
+    int  searchWordInLine(int indexLine, const std::string&) const;
+    void searchSymbolInLine(int indexLine, char symbol, int& indexWord, int& indexSymbol) const;
     int  getLineSize(int indexLine) const;
 
     //work form File

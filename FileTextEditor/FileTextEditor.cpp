@@ -77,26 +77,42 @@ void FileTextEditor::deleteLineBack()
 }
 
 //work in lines
-void FileTextEditor::searchWordInLine(int indexLine, std::string word, int indexWord) const
+int FileTextEditor::searchWordInLine(int indexLine, const std::string& word) const
 {
-    const std::vector<std::string>& Line = FileTextEditor::getLine(indexLine);
+    const std::vector<std::string>& words = FileTextEditor::getLine(indexLine);
 
-    for (ushint start = 0; start < Line.size(); ++start)
+    for (ushint index = 0; index < words.size(); ++index)
     {
-        if (Line[start] == word)
+        if (words[index] == word)
         {
-            return start;
+            return index;
         }
     }
-    return false;
+    return -1;
 }
-void FileTextEditor::searchSymbolInLine(int indexLine, char symbol, int indexWord, int indexSymbol) const
+void FileTextEditor::searchSymbolInLine(int indexLine, char symbol, int& indexWord, int& indexSymbol) const
 {
-    // TODO: Добавьте сюда код реализации.
+    const std::vector<std::string>& words = FileTextEditor::getLine(indexLine);
+
+    for (ushint start = 0; start < words.size(); ++start)
+    {
+        std::string word = words[start];
+        for (ushint index = 0; index < word.size(); ++index)
+        {
+            if (word[index] == symbol)
+            {
+                indexWord = start;
+                indexSymbol = index;
+                return ;
+            }
+        }
+    }
+    indexWord = -1;
+    indexSymbol = -1;
 }
 int  FileTextEditor::getLineSize(int indexLine) const
 {
-    // TODO: Добавьте сюда код реализации.
+    return (m_text.at(indexLine).size());
 }
 
 //work form File
