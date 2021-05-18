@@ -145,6 +145,11 @@ void FileEditor::                    openFile(const std::string& fileName)
     std::cout << "Works FileEditor::readFromFile(std::string& fileName)" << std::endl;
     m_fileName = fileName;
 
+    if (!m_data.empty())
+    {
+        m_data.clear();
+    }
+
     std::ifstream dataFileForInput(m_fileName);
     if (!dataFileForInput)
     {

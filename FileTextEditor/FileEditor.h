@@ -16,6 +16,7 @@ public:
     void                     print() const;
     bool                     empty();
     void                     resize(int size);
+    void		     clear();
 
 
     //for line
