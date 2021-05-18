@@ -1,5 +1,14 @@
 #include "FileTextEditor.h"
 
+//initialization
+void FileTextEditor::initText()
+{
+    for (ushint start = 0; start < FileEditor::size(); ++start)
+    {
+        FileTextEditor::setLine(start, FileEditor::separateBySpaces(start));
+    }
+}
+
 //for FileEditor
 void FileTextEditor::updata()
 {
@@ -30,18 +39,20 @@ void FileTextEditor::print() const
         const std::vector<std::string>& line = FileTextEditor::getLine(start);
         for (ushint index = 0; index < line.size(); ++index)
         {
-            std::cout << line[index] << std::endl;
+            std::cout << line[index] << " ";
         }
+        std::cout << std::endl;
     }
 }
 int  FileTextEditor::size() const
 {
-    // TODO: Добавьте сюда код реализации.
+    return m_text.size();
 }
 void FileTextEditor::empty()
 {
-    // TODO: Добавьте сюда код реализации.
+    m_text.empty();
 }
+
 
 //set, get, add and delete lines
 std::vector<std::string> FileTextEditor::getLine(int indexLine) const 
