@@ -90,26 +90,6 @@ int FileTextEditor::searchWordInLine(int indexLine, const std::string& word) con
     }
     return -1;
 }
-void FileTextEditor::searchSymbolInLine(int indexLine, char symbol, int& indexWord, int& indexSymbol) const
-{
-    const std::vector<std::string>& words = FileTextEditor::getLine(indexLine);
-
-    for (ushint start = 0; start < words.size(); ++start)
-    {
-        std::string word = words[start];
-        for (ushint index = 0; index < word.size(); ++index)
-        {
-            if (word[index] == symbol)
-            {
-                indexWord = start;
-                indexSymbol = index;
-                return ;
-            }
-        }
-    }
-    indexWord = -1;
-    indexSymbol = -1;
-}
 int  FileTextEditor::getLineSize(int indexLine) const
 {
     return (m_text.at(indexLine).size());
@@ -118,7 +98,21 @@ int  FileTextEditor::getLineSize(int indexLine) const
 //work form File
 void FileTextEditor::readFormFile(std::string filename = "")
 {
-    // TODO: Добавьте сюда код реализации.
+    if (filename == "")
+    {
+        filename = FileEditor::getFileName();
+    }
+
+    if (filename == "")
+    {
+        std::cout << "Error, FileEditor.cpp, dataFileForInput.open() == false" << std::endl;
+        std::cout << "fileName = " << filename << std::endl;
+        return;
+    }
+
+    FileEditor::openFile(filename);
+
+    
 }
 void FileTextEditor::updateFile()
 {

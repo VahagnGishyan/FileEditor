@@ -19,11 +19,13 @@ public:
 
     //for FileEditor
     void updata();
+    void emptyData();
 
     //for base work 
     void print() const;
     int  size() const;
     void empty();
+    void initText();
 
     //set, get, add and delete lines
     std::vector<std::string> getLine(int indexLine) const; 
@@ -37,7 +39,6 @@ public:
 
     //work in lines
     int  searchWordInLine(int indexLine, const std::string&) const;
-    void searchSymbolInLine(int indexLine, char symbol, int& indexWord, int& indexSymbol) const;
     int  getLineSize(int indexLine) const;
 
     //work form File

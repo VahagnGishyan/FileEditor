@@ -5,7 +5,7 @@ class FileEditor
 {
 private:
     std::vector<std::string> m_data;
-    std::string m_fileName;
+    std::string m_fileName = "";
 public:
     //initialization 
     FileEditor();
@@ -32,7 +32,7 @@ public:
 
     //for file
     void                     updateFile(std::string filename = "")  const;
-    void                     readFromFile(const std::string& filename);
+    void                     openFile(const std::string& filename);
 
     //Additions
     int                      getLineSize(const ushort start)  const;

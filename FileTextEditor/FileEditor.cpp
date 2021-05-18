@@ -140,7 +140,7 @@ void FileEditor::                    updateFile(std::string filename) const
         }
     }
 }
-void FileEditor::                    readFromFile(const std::string& fileName)
+void FileEditor::                    openFile(const std::string& fileName)
 {
     std::cout << "Works FileEditor::readFromFile(std::string& fileName)" << std::endl;
     m_fileName = fileName;
