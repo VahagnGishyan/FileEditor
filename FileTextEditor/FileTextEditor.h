@@ -16,16 +16,20 @@ public:
     {
 	// TODO: Добавьте сюда код реализации.
     }
+    
+    void initText();
+    void clearData();
+    void clearText();
+
 
     //for FileEditor
     void updata();
-    void emptyData();
 
     //for base work 
     void print() const;
     int  size() const;
-    void empty();
-    void initText();
+    bool empty();
+
 
     //set, get, add and delete lines
     std::vector<std::string> getLine(int indexLine) const; 

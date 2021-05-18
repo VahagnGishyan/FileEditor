@@ -25,7 +25,14 @@ void FileTextEditor::updata()
 //for base work 
 void FileTextEditor::print() const
 {
-    // TODO: Добавьте сюда код реализации.
+    for (ushint start = 0; start < size(); ++start)
+    {
+        const std::vector<std::string>& line = FileTextEditor::getLine(start);
+        for (ushint index = 0; index < line.size(); ++index)
+        {
+            std::cout << line[index] << std::endl;
+        }
+    }
 }
 int  FileTextEditor::size() const
 {
