@@ -1,12 +1,12 @@
 #include "FileEditor.h"
 
 //initialization 
-FileEditor::FileEditor()
+FileEditor::                         FileEditor()
 {
     std::cout << "Works Constructor FileEditor()" << std::endl;
     m_fileName = "";
 }
-FileEditor::FileEditor(const std::string& fileName)
+FileEditor::                         FileEditor(const std::string& fileName)
 {
     m_fileName = fileName;
     std::ifstream dataFileForInput(m_fileName);
@@ -28,11 +28,11 @@ FileEditor::FileEditor(const std::string& fileName)
 }
 
 //to work
-int  FileEditor::size() const
+int  FileEditor::                    size() const
 {
     return m_data.size();
 }
-void FileEditor::print() const
+void FileEditor::                    print() const
 {
 
     if (m_data.empty())
@@ -47,21 +47,26 @@ void FileEditor::print() const
         }
     }
 }
-bool FileEditor::empty() const
+bool FileEditor::                    empty() 
 {
     return m_data.empty();
 }
-void FileEditor::addNewLineBack(const std::string& newLine)
+void FileEditor::                    resize(int size)
+{
+    m_data.resize(size);
+}
+
+void FileEditor::                    addNewLineBack(const std::string& newLine)
 {
     m_data.push_back(newLine);
 }
-void FileEditor::deleteLineBack()
+void FileEditor::                    deleteLineBack()
 {
     m_data.pop_back();
 }
 
 //for line
-void FileEditor::addNewLine(const unsigned short indexLine, const std::string& newLine)
+void FileEditor::                    addNewLine(const unsigned short indexLine, const std::string& newLine)
 {
     std::string Line = newLine;
     ushint size = static_cast<ushint>(m_data.size());
@@ -74,7 +79,7 @@ void FileEditor::addNewLine(const unsigned short indexLine, const std::string& n
     }
     addNewLineBack(Line);
 }
-void FileEditor::deleteLine(const shint indexLine)
+void FileEditor::                    deleteLine(const shint indexLine)
 {
     for (unsigned short int index = indexLine; index < size() - 1; ++index)
     {
@@ -83,7 +88,7 @@ void FileEditor::deleteLine(const shint indexLine)
     deleteLineBack();
 }
 
-void FileEditor::deleteInLine(const shint indexLine, const shint indexleft, const shint indexRight)
+void FileEditor::                    deleteInLine(const shint indexLine, const shint indexleft, const shint indexRight)
 {
     std::string line = FileEditor::getLine(indexLine);
 
@@ -105,32 +110,17 @@ void FileEditor::deleteInLine(const shint indexLine, const shint indexleft, cons
     FileEditor::setLine(indexLine, newLine);
 }
 
-void FileEditor::setLine(int index, const std::string& newLine)
+void FileEditor::                    setLine(int index, const std::string& newLine)
 {
-    int sizeData = size();
-
-    assert(index <= sizeData && "index shell be <= size");
-
-    if (index == sizeData)
-    {
-        m_data.push_back(newLine);
-    }
-    else
-    {
-        m_data[index] = newLine;
-    }
+    m_data.at(index) = newLine;
 }
-std::string FileEditor::getLine(int index) const
+std::string FileEditor::             getLine(int index) const
 {
-    int sizeData = size();
-
-    assert(index < sizeData && "index shell be <= size");
-
-    return(m_data[index]);
+    return(m_data.at(index));
 }
 
 //for file
-void FileEditor::updateFile(std::string filename) const
+void FileEditor::                    updateFile(std::string filename) const
 {
     if (filename == "")
         filename = m_fileName;
@@ -150,7 +140,7 @@ void FileEditor::updateFile(std::string filename) const
         }
     }
 }
-void FileEditor::readFromFile(const std::string& fileName)
+void FileEditor::                    readFromFile(const std::string& fileName)
 {
     std::cout << "Works FileEditor::readFromFile(std::string& fileName)" << std::endl;
     m_fileName = fileName;
@@ -179,21 +169,21 @@ void FileEditor::readFromFile(const std::string& fileName)
 }
 
 //Additions
-int FileEditor::getLineEnd(const ushort start) const
+int FileEditor::                     getLineSize(const ushort start) const
 {
     return m_data.at(start).size();
 }
-std::string FileEditor::getFileName()  const
+std::string FileEditor::             getFileName()  const
 {
     return m_fileName;
 }
 std::vector<std::string> FileEditor::separateBySpaces(const ushint indexLine)
 {
     std::vector<std::string> resultData;
-    const std::string line = m_data.at(indexLine);
+    const std::string& line = FileEditor::getLine(indexLine);
 
     std::string word = "";
-    const ushint size = getIndexLineEnd(indexLine);
+    const ushint size = getLineSize(indexLine);
 
 
     for (ushint index = 0; index < size; ++index)
@@ -217,12 +207,12 @@ std::vector<std::string> FileEditor::separateBySpaces(const ushint indexLine)
 
     return (resultData);
 }
-void FileEditor::separateBySpaces(const ushint indexLine, std::vector<std::string> newLine)
+void FileEditor::                    separateBySpaces(const ushint indexLine, std::vector<std::string> newLine)
 {
-    const std::string line = m_data.at(indexLine);
+    const std::string& line = FileEditor::getLine(indexLine);
 
     std::string word = "";
-    const ushint size = getIndexLineEnd(indexLine);
+    const ushint size = getLineSize(indexLine);
 
     for (ushint index = 0; index < size; ++index)
     {
@@ -241,10 +231,4 @@ void FileEditor::separateBySpaces(const ushint indexLine, std::vector<std::strin
             word += symbol;
         }
     }
-}
-
-//Operators
-std::string FileEditor::operator[] (const ushort index) const
-{
-    return m_data[index];
 }

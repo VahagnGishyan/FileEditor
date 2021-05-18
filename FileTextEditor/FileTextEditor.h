@@ -17,12 +17,8 @@ public:
 	// TODO: Добавьте сюда код реализации.
     }
 
-    //operators
-    std::vector<std::string> operator[](int index) const;
-
     //for FileEditor
     void updata();
-    std::string getFileName()  const;
 
     //for base work 
     void print() const;
@@ -31,11 +27,11 @@ public:
 
     //set, get, add and delete lines
     std::vector<std::string> getLine(int indexLine);
-    void setLine(int indexLine, std::string newLine);
-    void addNewLine(int indexLine, std::string newLine);
+    void setLine(int indexLine, const std::vector<std::string>& newLine);
+    void addNewLine(int indexLine, const std::vector<std::string>& newLine);
     void deleteLine(int indexLine);
-    void addNewLineBack(int indexLine, std::string newLine);
-    void deleteLineBack(int indexLine);
+    void addNewLineBack(const std::vector<std::string>&  newLine);
+    void deleteLineBack();
 
     //work in lines
     void searchWordInLine(int indexLine, std::string word, int indexWord, int indexSymbol) const;
@@ -48,6 +44,5 @@ public:
 
     //void splitWords();
     void splitWordsBySpace();
-
 };
 

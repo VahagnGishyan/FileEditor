@@ -14,7 +14,8 @@ public:
     //to work
     int                      size() const;
     void                     print() const;
-    bool                     empty() const;
+    bool                     empty();
+    void                     resize(int size);
 
 
     //for line
@@ -34,7 +35,7 @@ public:
     void                     readFromFile(const std::string& filename);
 
     //Additions
-    int                      getLineEnd(const ushort start)  const;
+    int                      getLineSize(const ushort start)  const;
     std::string              getFileName()  const;
     std::vector<std::string> separateBySpaces(const ushint indexLine);
     void                     separateBySpaces(const ushint indexLine, std::vector<std::string> newLine);

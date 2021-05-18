@@ -53,7 +53,7 @@ std::vector<std::string> FileTextEditor::getLine(int indexLine)
 }
 void FileTextEditor::setLine(int indexLine, std::string newLine)
 {
-    FileEditor::
+    FileEditor::setLine(indexLine, newLine);
 }
 void FileTextEditor::addNewLine(int indexLine, std::string newLine)
 {
