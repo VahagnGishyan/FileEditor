@@ -146,7 +146,6 @@
   <ItemGroup>
     <ClCompile Include="..\FileEditor\FileEditor.cpp" />
     <ClCompile Include="FileTextEditor.cpp" />
-    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

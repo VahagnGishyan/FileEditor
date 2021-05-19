@@ -14,5 +14,3 @@ using uint   = unsigned int;
 
 using ulong  = unsigned long int;
 using ulint  = unsigned long int;
-
-#include "../FileEditor/FileEditor.h"
