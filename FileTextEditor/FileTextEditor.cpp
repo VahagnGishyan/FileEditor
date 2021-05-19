@@ -48,7 +48,7 @@ int  FileTextEditor::size() const
 {
     return m_text.size();
 }
-void FileTextEditor::empty()
+bool FileTextEditor::empty()
 {
     m_text.empty();
 }
@@ -130,11 +130,12 @@ void FileTextEditor::readFormFile(std::string filename = "")
 
     FileEditor::openFile(filename);
 
-    
+    // TODO: Добавьте сюда код реализации.
 }
 void FileTextEditor::updateFile()
 {
-    // TODO: Добавьте сюда код реализации.
+    updata();
+    FileEditor::updateFile();
 }
 
 //void splitWords();
