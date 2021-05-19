@@ -139,12 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="FileEditor.h" />
+    <ClInclude Include="..\FileEditor\FileEditor.h" />
     <ClInclude Include="FileTextEditor.h" />
     <ClInclude Include="Header.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FileEditor.cpp" />
+    <ClCompile Include="..\FileEditor\FileEditor.cpp" />
     <ClCompile Include="FileTextEditor.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

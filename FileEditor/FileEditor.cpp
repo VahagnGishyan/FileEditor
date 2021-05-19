@@ -117,8 +117,12 @@ void FileEditor::                    deleteInLine(const int indexLine, const int
 void FileEditor::                    setLine(int index, const std::string& newLine)
 {
     ushint length = size();
-
-    assert(length <= index && "The index cannot be longer than the length");
+    
+    if (length > index)
+    {
+        std::cerr<< "The index cannot be longer than the length"<<std::endl;
+        return;
+    }
 
     if (length < index)
         m_data[index] = newLine;

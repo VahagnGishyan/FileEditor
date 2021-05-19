@@ -1,4 +1,3 @@
-#include "FileEditor.h"
 #include "FileTextEditor.h"
 
 int main()

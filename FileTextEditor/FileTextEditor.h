@@ -1,5 +1,5 @@
 #pragma once
-#include "FileEditor.h"
+#include "Header.h"
 
 class FileTextEditor : public FileEditor
 {
