@@ -1,53 +1,30 @@
 #include "FileTextEditor.h"
 
 //initialization
-void FileTextEditor::initText()
+void FileTextEditor::init(ushint indexStart = -1, ushint indexEnd = -1)
 {
-    for (ushint start = 0; start < FileEditor::size(); ++start)
+    if (indexStart < 0)
     {
-        FileTextEditor::setLine(start, FileEditor::separateBySpaces(start));
+        indexStart = 0;
     }
-    FileTextEditor::clearData();
+    if (indexEnd < 0)
+    {
+        indexEnd = FileEditor::size();
+    }
+
+    for (ushint start = 0; start < indexEnd; ++start)
+    {
+        FileTextEditor::setLine(start, FileEditor::splitWordsBySpace(start));
+    }
 }
-void FileTextEditor::clearData()
-{
-    FileEditor::clear();
-}
-void FileTextEditor::clearText()
+void FileTextEditor::clear()
 {
     m_text.clear();
-}
-
-//for FileEditor
-void FileTextEditor::updata()
-{
-    FileEditor::empty();
-    for (ushint start = 0; start < size(); ++start)
-    {
-        std::vector<std::string> line = FileTextEditor::getLine(start);
-        
-        if (line.empty())
-            continue;
-        
-        std::string newLine = line.front();
-        
-        for (ushint index = 0; index < getLineSize(index); ++index)
-        {
-            newLine += " " + line[index];
-        }
-
-        FileEditor::setLine(start, newLine);
-    }
 }
 
 //for base work 
 void FileTextEditor::print() const
 {
-    if (size() == 0)
-    {
-        FileEditor::print();
-        return;
-    }
     for (ushint start = 0; start < size(); ++start)
     {
         const std::vector<std::string>& line = FileTextEditor::getLine(start);
@@ -62,9 +39,9 @@ void FileTextEditor::print() const
 }
 int  FileTextEditor::size() const
 {
-    return m_text.size();
+    return (m_text.size());
 }
-bool FileTextEditor::empty()
+bool FileTextEditor::empty() const
 {
     return (m_text.empty());
 }
@@ -88,6 +65,7 @@ void FileTextEditor::setLine(int indexLine, const std::vector<std::string>&  new
 }
 void FileTextEditor::addNewLine(int indexLine, const std::vector<std::string>& newLine)
 {
+
     std::vector<std::string> reservData;
     ushint length = size();
 
@@ -152,16 +130,11 @@ void FileTextEditor::readFormFile(std::string filename)
     }
 
     FileEditor::openFile(filename);
-    initText();
+    init();
 }
 void FileTextEditor::updateFile()
 {
-    updata();
     FileEditor::updateFile();
 }
 
-//void splitWords();
-void FileTextEditor::splitWordsBySpace()
-{
-    // TODO: Добавьте сюда код реализации.
-}
+

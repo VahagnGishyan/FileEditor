@@ -193,7 +193,7 @@ std::string FileEditor::             getFileName()  const
 {
     return m_fileName;
 }
-std::vector<std::string> FileEditor::separateBySpaces(const ushint indexLine)
+std::vector<std::string> FileEditor::splitWordsBySpace(const ushint indexLine)
 {
     std::vector<std::string> resultData;
     const std::string& line = FileEditor::getLine(indexLine);
@@ -223,7 +223,7 @@ std::vector<std::string> FileEditor::separateBySpaces(const ushint indexLine)
 
     return (resultData);
 }
-void FileEditor::                    separateBySpaces(const ushint indexLine, std::vector<std::string> newLine)
+void FileEditor::                    splitWordsBySpace(const ushint indexLine, std::vector<std::string> newLine)
 {
     const std::string& line = FileEditor::getLine(indexLine);
 

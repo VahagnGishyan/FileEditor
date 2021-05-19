@@ -38,7 +38,7 @@ public:
     //Additions
     int                      getLineSize(const ushort start)  const;
     std::string              getFileName()  const;
-    std::vector<std::string> separateBySpaces(const ushint indexLine);
-    void                     separateBySpaces(const ushint indexLine, std::vector<std::string> newLine);
+    std::vector<std::string> splitWordsBySpace(const ushint indexLine);
+    void                     splitWordsBySpace(const ushint indexLine, std::vector<std::string> newLine);
 };
 

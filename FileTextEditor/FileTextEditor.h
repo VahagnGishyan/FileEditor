@@ -14,13 +14,11 @@ public:
     }
     FileTextEditor(std::string filename) : FileEditor(filename)
     {
-	initText();
+
     }
     
-    void initText();
-    void clearData();
-    void clearText();
-
+    void init(ushint indexStart = -1, ushint indexEnd = -1);
+    void clear();
 
     //for FileEditor
     void updata();
@@ -28,8 +26,7 @@ public:
     //for base work 
     void print() const;
     int  size() const;
-    bool empty();
-
+    bool empty() const;
 
     //set, get, add and delete lines
     std::vector<std::string> getLine(int indexLine) const; 
@@ -48,8 +45,5 @@ public:
     //work form File
     void readFormFile(std::string filename = "");
     void updateFile();
-
-    //void splitWords();
-    void splitWordsBySpace();
 };
 
