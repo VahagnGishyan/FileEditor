@@ -7,6 +7,15 @@ void FileTextEditor::initText()
     {
         FileTextEditor::setLine(start, FileEditor::separateBySpaces(start));
     }
+    FileTextEditor::clearData();
+}
+void FileTextEditor::clearData()
+{
+    FileEditor::clear();
+}
+void FileTextEditor::clearText()
+{
+    m_text.clear();
 }
 
 //for FileEditor
@@ -37,6 +46,8 @@ void FileTextEditor::print() const
     for (ushint start = 0; start < size(); ++start)
     {
         const std::vector<std::string>& line = FileTextEditor::getLine(start);
+
+        std::cout << start << "\t";
         for (ushint index = 0; index < line.size(); ++index)
         {
             std::cout << line[index] << " ";
@@ -50,7 +61,7 @@ int  FileTextEditor::size() const
 }
 bool FileTextEditor::empty()
 {
-    m_text.empty();
+    return (m_text.empty());
 }
 
 
@@ -61,7 +72,14 @@ std::vector<std::string> FileTextEditor::getLine(int indexLine) const
 } 
 void FileTextEditor::setLine(int indexLine, const std::vector<std::string>&  newLine)
 {
-    m_text.at(indexLine) = newLine;
+    ushint length = size();
+
+    assert(length <= indexLine && "The index cannot be longer than the length");
+
+    if (length < indexLine)
+        m_text[indexLine] = newLine;
+    else
+        m_text.push_back(newLine);
 }
 void FileTextEditor::addNewLine(int indexLine, const std::vector<std::string>& newLine)
 {
@@ -114,7 +132,7 @@ int  FileTextEditor::getLineSize(int indexLine) const
 }
 
 //work form File
-void FileTextEditor::readFormFile(std::string filename = "")
+void FileTextEditor::readFormFile(std::string filename)
 {
     if (filename == "")
     {
@@ -129,8 +147,7 @@ void FileTextEditor::readFormFile(std::string filename = "")
     }
 
     FileEditor::openFile(filename);
-
-    // TODO: Добавьте сюда код реализации.
+    initText();
 }
 void FileTextEditor::updateFile()
 {

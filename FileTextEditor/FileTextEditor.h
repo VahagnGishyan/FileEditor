@@ -14,7 +14,7 @@ public:
     }
     FileTextEditor(std::string filename) : FileEditor(filename)
     {
-	// TODO: Добавьте сюда код реализации.
+	initText();
     }
     
     void initText();

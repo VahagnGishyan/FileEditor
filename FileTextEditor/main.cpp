@@ -1,4 +1,5 @@
 #include "FileEditor.h"
+#include "FileTextEditor.h"
 
 int main()
 {
@@ -6,6 +7,9 @@ int main()
 
     FileEditor object("data.txt");
     object.print();
+
+    FileTextEditor data("data.txt");
+    data.print();
 
     std::cout << std::endl << "End work main.cpp" << std::endl;
 

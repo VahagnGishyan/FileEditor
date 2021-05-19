@@ -55,6 +55,10 @@ void FileEditor::                    resize(int size)
 {
     m_data.resize(size);
 }
+void FileEditor::                    clear()
+{
+    m_data.clear();
+}
 
 void FileEditor::                    addNewLineBack(const std::string& newLine)
 {
@@ -112,7 +116,14 @@ void FileEditor::                    deleteInLine(const shint indexLine, const s
 
 void FileEditor::                    setLine(int index, const std::string& newLine)
 {
-    m_data.at(index) = newLine;
+    ushint length = size();
+
+    assert(length <= index && "The index cannot be longer than the length");
+
+    if (length < index)
+        m_data[index] = newLine;
+    else 
+        m_data.push_back(newLine);
 }
 std::string FileEditor::             getLine(int index) const
 {
