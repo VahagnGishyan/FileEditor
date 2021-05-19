@@ -43,6 +43,11 @@ void FileTextEditor::updata()
 //for base work 
 void FileTextEditor::print() const
 {
+    if (size() == 0)
+    {
+        FileEditor::print();
+        return;
+    }
     for (ushint start = 0; start < size(); ++start)
     {
         const std::vector<std::string>& line = FileTextEditor::getLine(start);
