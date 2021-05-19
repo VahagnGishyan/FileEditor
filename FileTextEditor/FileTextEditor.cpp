@@ -1,7 +1,7 @@
 #include "FileTextEditor.h"
 
 //initialization
-void FileTextEditor::init(int indexStart, int indexEnd)
+void FileTextEditor::                    init(int indexStart, int indexEnd)
 {
     if (indexStart < 0)
     {
@@ -17,13 +17,13 @@ void FileTextEditor::init(int indexStart, int indexEnd)
         FileTextEditor::setLine(start, FileEditor::splitWordsBySpace(start));
     }
 }
-void FileTextEditor::clear()
+void FileTextEditor::                    clear()
 {
     m_text.clear();
 }
 
 //for FileEditor
-void FileTextEditor::updata()
+void FileTextEditor::                    updata()
 {
     FileEditor::empty();
     for (ushint start = 0; start < size(); ++start)
@@ -45,7 +45,7 @@ void FileTextEditor::updata()
 }
 
 //for base work 
-void FileTextEditor::print() const
+void FileTextEditor::                    print() const
 {
     for (ushint start = 0; start < size(); ++start)
     {
@@ -59,11 +59,11 @@ void FileTextEditor::print() const
         std::cout << std::endl;
     }
 }
-int  FileTextEditor::size() const
+int  FileTextEditor::                    size() const
 {
     return (m_text.size());
 }
-bool FileTextEditor::empty() const
+bool FileTextEditor::                    empty() const
 {
     return (m_text.empty());
 }
@@ -74,7 +74,7 @@ std::vector<std::string> FileTextEditor::getLine(int indexLine) const
 {
     return(m_text.at(indexLine));
 } 
-void FileTextEditor::setLine(int indexLine, const std::vector<std::string>&  newLine)
+void FileTextEditor::                    setLine(int indexLine, const std::vector<std::string>&  newLine)
 {
     ushint length = size();
 
@@ -85,7 +85,7 @@ void FileTextEditor::setLine(int indexLine, const std::vector<std::string>&  new
     else
         m_text.push_back(newLine);
 }
-void FileTextEditor::addNewLine(int indexLine, const std::vector<std::string>& newLine)
+void FileTextEditor::                    addNewLine(int indexLine, const std::vector<std::string>& newLine)
 {
 
     std::vector<std::string> reservData = newLine;
@@ -106,7 +106,7 @@ void FileTextEditor::addNewLine(int indexLine, const std::vector<std::string>& n
 
     addNewLineBack(reservData);
 }
-void FileTextEditor::deleteLine(int indexLine)
+void FileTextEditor::                    deleteLine(int indexLine)
 {
     for (unsigned short int index = indexLine; index < size() - 1; ++index)
     {
@@ -114,17 +114,17 @@ void FileTextEditor::deleteLine(int indexLine)
     }
     deleteLineBack();
 }
-void FileTextEditor::addNewLineBack(const std::vector<std::string>& newLine)
+void FileTextEditor::                    addNewLineBack(const std::vector<std::string>& newLine)
 {
     m_text.push_back(newLine);
 }
-void FileTextEditor::deleteLineBack()
+void FileTextEditor::                    deleteLineBack()
 {
     m_text.pop_back();
 }
 
 //work in lines
-int FileTextEditor::searchWordInLine(int indexLine, const std::string& word) const
+int FileTextEditor::                     searchWordInLine(int indexLine, const std::string& word) const
 {
     const std::vector<std::string>& words = FileTextEditor::getLine(indexLine);
 
@@ -137,13 +137,13 @@ int FileTextEditor::searchWordInLine(int indexLine, const std::string& word) con
     }
     return -1;
 }
-int  FileTextEditor::getLineSize(int indexLine) const
+int  FileTextEditor::                    getLineSize(int indexLine) const
 {
     return (m_text.at(indexLine).size());
 }
 
 //work form File
-void FileTextEditor::readFormFile(std::string filename)
+void FileTextEditor::                    readFormFile(std::string filename)
 {
     if (filename == "")
     {
@@ -160,7 +160,7 @@ void FileTextEditor::readFormFile(std::string filename)
     FileEditor::openFile(filename);
     init();
 }
-void FileTextEditor::updateFile()
+void FileTextEditor::                    updateFile()
 {
     updata();
     FileEditor::updateFile();
