@@ -83,7 +83,7 @@ void FileEditor::                    addNewLine(const unsigned short indexLine, 
     }
     addNewLineBack(Line);
 }
-void FileEditor::                    deleteLine(const shint indexLine)
+void FileEditor::                    deleteLine(const int indexLine)
 {
     for (unsigned short int index = indexLine; index < size() - 1; ++index)
     {
@@ -92,7 +92,7 @@ void FileEditor::                    deleteLine(const shint indexLine)
     deleteLineBack();
 }
 
-void FileEditor::                    deleteInLine(const shint indexLine, const shint indexleft, const shint indexRight)
+void FileEditor::                    deleteInLine(const int indexLine, const int indexleft, const shint indexRight)
 {
     std::string line = FileEditor::getLine(indexLine);
 
@@ -185,7 +185,7 @@ void FileEditor::                    openFile(const std::string& fileName)
 }
 
 //Additions
-int FileEditor::                     getLineSize(const ushort start) const
+int FileEditor::                     getLineSize(const int start) const
 {
     return m_data.at(start).size();
 }
@@ -193,16 +193,16 @@ std::string FileEditor::             getFileName()  const
 {
     return m_fileName;
 }
-std::vector<std::string> FileEditor::splitWordsBySpace(const ushint indexLine)
+std::vector<std::string> FileEditor::splitWordsBySpace(const int indexLine)
 {
     std::vector<std::string> resultData;
     const std::string& line = FileEditor::getLine(indexLine);
 
     std::string word = "";
-    const ushint size = getLineSize(indexLine);
+    const int size = getLineSize(indexLine);
 
 
-    for (ushint index = 0; index < size; ++index)
+    for (int index = 0; index < size; ++index)
     {
         const char symbol = line[index];
 
@@ -218,12 +218,13 @@ std::vector<std::string> FileEditor::splitWordsBySpace(const ushint indexLine)
             word += symbol;
         }
     }
-    if(!word.empty())
+
+     if(!word.empty())
         resultData.push_back(word);
 
     return (resultData);
 }
-void FileEditor::                    splitWordsBySpace(const ushint indexLine, std::vector<std::string> newLine)
+void FileEditor::                    splitWordsBySpace(const int indexLine, std::vector<std::string> newLine)
 {
     const std::string& line = FileEditor::getLine(indexLine);
 

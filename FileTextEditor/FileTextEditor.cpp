@@ -1,7 +1,7 @@
 #include "FileTextEditor.h"
 
 //initialization
-void FileTextEditor::init(ushint indexStart = -1, ushint indexEnd = -1)
+void FileTextEditor::init(int indexStart, int indexEnd)
 {
     if (indexStart < 0)
     {
@@ -20,6 +20,28 @@ void FileTextEditor::init(ushint indexStart = -1, ushint indexEnd = -1)
 void FileTextEditor::clear()
 {
     m_text.clear();
+}
+
+//for FileEditor
+void FileTextEditor::updata()
+{
+    FileEditor::empty();
+    for (ushint start = 0; start < size(); ++start)
+    {
+        std::vector<std::string> line = FileTextEditor::getLine(start);
+
+        if (line.empty())
+            continue;
+
+        std::string newLine = line.front();
+
+        for (ushint index = 0; index < getLineSize(index); ++index)
+        {
+            newLine += " " + line[index];
+        }
+
+        FileEditor::setLine(start, newLine);
+    }
 }
 
 //for base work 
@@ -56,9 +78,9 @@ void FileTextEditor::setLine(int indexLine, const std::vector<std::string>&  new
 {
     ushint length = size();
 
-    assert(length <= indexLine && "The index cannot be longer than the length");
+    assert(indexLine <= length && "The index cannot be longer than the length");
 
-    if (length < indexLine)
+    if (indexLine < length)
         m_text[indexLine] = newLine;
     else
         m_text.push_back(newLine);
@@ -66,10 +88,16 @@ void FileTextEditor::setLine(int indexLine, const std::vector<std::string>&  new
 void FileTextEditor::addNewLine(int indexLine, const std::vector<std::string>& newLine)
 {
 
-    std::vector<std::string> reservData;
+    std::vector<std::string> reservData = newLine;
     ushint length = size();
 
-    for (ushint index = 0; index < length; ++index)
+    if (indexLine == length)
+    {
+        FileTextEditor::addNewLineBack(newLine);
+        return;
+    }
+
+    for (ushint index = indexLine; index < length; ++index)
     {
         std::vector<std::string> registerLine = FileTextEditor::getLine(index);
         FileTextEditor::setLine(index, reservData);
@@ -134,7 +162,6 @@ void FileTextEditor::readFormFile(std::string filename)
 }
 void FileTextEditor::updateFile()
 {
+    updata();
     FileEditor::updateFile();
 }
-
-

@@ -14,10 +14,10 @@ public:
     }
     FileTextEditor(std::string filename) : FileEditor(filename)
     {
-
+	init();
     }
     
-    void init(ushint indexStart = -1, ushint indexEnd = -1);
+    void init(int indexStart = -1, int indexEnd = -1);
     void clear();
 
     //for FileEditor
