@@ -118,13 +118,13 @@ void FileEditor::                    setLine(int index, const std::string& newLi
 {
     ushint length = size();
     
-    if (length > index)
+    if (index > length)
     {
         std::cerr<< "The index cannot be longer than the length"<<std::endl;
         return;
     }
 
-    if (length < index)
+    if (index < length)
         m_data[index] = newLine;
     else 
         m_data.push_back(newLine);
